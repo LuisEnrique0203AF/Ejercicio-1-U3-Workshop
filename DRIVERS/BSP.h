@@ -26,8 +26,22 @@
 
 /* Definición de botones con su respectivo puerto. */
 
+//Definiciones de Puertos
+#define PUERTO1    1
+#define PUERTO2    2
+/////
+
+#define BOTON2   (0x0010)
+#define BOTON1    (0x0002)
+
+
+
 
 /* Definición de led's plasmados en tarjeta con su respectivo puerto. */
+
+#define LEDROJO    (0x0001)
+#define LEDVERDE    (0x0002)
+#define LEDBLUE    (0x0004)
 
 
 #endif /* BSP_H_ */
