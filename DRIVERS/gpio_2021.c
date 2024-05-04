@@ -22,6 +22,7 @@
  * Alfredo Chacon y el TecNM /IT Chihuahua no son responsables del mal uso de este material.
  *************************************************************************************************/
 #include "gpio_2021.h"
+#include "DRIVERS\BSP.h"
 
 /* Declaración del arreglo GPIO_PORT_TO_BASE
  * En el cual se encuentran las direcciones en donde comienzan
@@ -56,7 +57,31 @@ uint8_t Gpio_Pin_in( uint_fast16_t pin_)
         return (0x01);
     return (0x00);
 }
-                                                   // <-- E8
+ //         FUNCION PROPIA  <-- E8
+
+uint8_t LeerEntradaP2 ( uint_fast16_t pin_)
+{
+    uint_fast16_t inputPinValue;
+    inputPinValue = PUERTO_P2->IN & (pin_);         // LEE EL REGISTRO QUE INDICA EL VALOR DE ENTRADA DE UN PIN
+    if (inputPinValue > 0)                          // RETORNA EL VALOR 1 o 0
+        return (0x01);
+    return (0x00);
+}
+
+void configuracion_GPIO() {
+
+    /************************************************
+        CONFIGURACION DE GPIO
+    ************************************************/
+    GPIO_setPinEntradaconPullUp(PUERTO1,BOTON2);                 //PIN P1.4 COMO ENTRADA
+    GPIO_setPinEntradaconPullUp(PUERTO1,BOTON1);                 //PIN P1.1 COMO ENTRADA
+
+    GPIO_setPinSalida(PUERTO2, LEDROJO | LEDVERDE |LEDBLUE);  // CONFIGURA PINES 2.0,2.1,2.2  COMO SALIDA (LEDS RGB)"
+    GPIO_setPinSalida(PUERTO1, LEDROJO);                         // CONFIGURA PINES 1.0  COMO SALIDA (LED ROJO)"
+    GPIO_setPinBajo(PUERTO2, LEDROJO | LEDVERDE |LEDBLUE);    // APAGADOS RGB
+    GPIO_setPinBajo(PUERTO1, LEDROJO );                          // APAGADOS ROJO
+}
+
 
 /******************************************************************************
  * Function: GPIO_setPinSalida
