@@ -38,14 +38,8 @@ void main(void)
     uint8_t bandera = 0;
 
     WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;           // DETIENE EL TIMER DEL WATCHDOG
-    /************************************************
-        CONFIGURACION DE GPIO
-    ************************************************/
-    GPIO_setPinEntradaconPullUp(PUERTO1, PIN4);     //PIN P1.4 COMO ENTRADA
-    GPIO_setPinEntradaconPullUp(PUERTO2, PIN4);  //PIN P2.4 COMO ENTRADA
 
-    GPIO_setPinSalida(PUERTO2, LEDROJO | LEDVERDE |LEDBLUE);   // CONFIGURA PINES 2.0,2.1,2.2  COMO SALIDA (LEDS RGB)"
-    GPIO_setPinBajo(PUERTO2, LEDROJO | LEDVERDE |LEDBLUE);      // APAGADOS
+    configuracion_GPIO();
 
     while(1)
     {
